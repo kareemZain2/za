@@ -40,11 +40,11 @@ $(function (){
             document.querySelector("#main-content").innerHTML = responseText;
         },false);
 
-        dc.loadMenuCategories = function(){
+        dc.loadMenuCategories = function () {
             showLoading("#main-content");
-            $ajaxUtils.sendGetRequest(allCategoriesHtml,buildAndShowCategoriesHtml);
-        };
-        function buildAndShowCategoriesHtml(categories){
+            $ajaxUtils.sendGetRequest(allCategoriesUrl,buildAndShowCategoriesHTML);
+          };
+        function buildAndShowCategoriesHTML(categories){
             $ajaxUtils.sendGetRequest(categoriesTitleHtml,function(categoriesTitleHtml){
                 $ajaxUtils.sendGetRequest(categoryHtml,function(categoryHtml){
                     var categoriesviewHtml = buildCategoriesViewHtml(categories,categoriesTitleHtml,categoryHtml);
@@ -61,7 +61,7 @@ $(function (){
                 var name = "" + categories[i].name;
                 var short_name = categories[i].short_name;
                 html = insertProperty(html,"name",name);
-                html += insertProperty(html,"short_name",short_name);
+                html = insertProperty(html,"short_name",short_name);
                 finalHtml += html;
             }
             finalHtml += "</section>";
