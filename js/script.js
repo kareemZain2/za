@@ -11,7 +11,7 @@ $(function (){
 
     var homeHtml = "snippets/home-snippet.html";
 
-    var allCategoriesHtml = "http://davids-restaurant.herokuapp.com/categories.json";
+    var allCategoriesHtml = "https://davids-restaurant.herokuapp.com/categories.json";
 
     var categoriesTitleHtml = "snippets/categories-title-sippet.html";
 
@@ -42,7 +42,7 @@ $(function (){
 
         dc.loadMenuCategories = function(){
             showLoading("#main-content");
-            $ajaxUtils.sendGetRequest(categoryHtml,buildAndShowCategoriesHtml);
+            $ajaxUtils.sendGetRequest(allCategoriesHtml,buildAndShowCategoriesHtml);
         };
         function buildAndShowCategoriesHtml(categories){
             $ajaxUtils.sendGetRequest(categoriesTitleHtml,function(categoriesTitleHtml){
