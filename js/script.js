@@ -17,6 +17,12 @@ $(function (){
 
     var categoryHtml = "snippets/category-snippet.html";
 
+    var menuItemsUrl =  "https://davids-restaurant.herokuapp.com/manu-items.json?category=";
+
+    var menuItemsTitleHtml = "snippets/menu-items-title.html";
+
+    var menuItemHtml = "snippets/menu-item.html";
+
     var insertHtml = function(selector,html){
         var targetElem = document.querySelector(selector);
         targetElem.innerHTML = html;
@@ -43,7 +49,13 @@ $(function (){
         dc.loadMenuCategories = function () {
             showLoading("#main-content");
             $ajaxUtils.sendGetRequest(allCategoriesHtml,buildAndShowCategoriesHTML);
-          };
+        };
+
+        dc.loadMenuItems = function(categoryShort){
+            showLoading("#main-content");
+            $ajaxUtils.sendGetRequest(menuItemsUrl + categoryShort,buildAndShowCategoriesHTML);
+        };
+
         function buildAndShowCategoriesHTML(categories){
             $ajaxUtils.sendGetRequest(categoriesTitleHtml,function(categoriesTitleHtml){
                 $ajaxUtils.sendGetRequest(categoryHtml,function(categoryHtml){
@@ -66,6 +78,15 @@ $(function (){
             }
             finalHtml += "</section>";
             return finalHtml;
+        };
+
+        function buildAndShowMenuItemsHTML(cetegoryMenuItems){
+            $ajaxUtils.sendGetRequest(menuItemsTitleHtml,function (menuItemsTitleHtml){
+                $ajaxUtils.sendGetRequest(menuItemHtml,function(menuItemHtml){
+                    var menuItemsViewHtml = buildMenuItemsViewHtml(categoryMenuItems,menuItemsTitleHtml,menuItemHtml);
+                    insertHtml("#main-content",menuItemsViewHtml);
+                },false);
+            },false);
         };
     });
     global.$dc = dc;
