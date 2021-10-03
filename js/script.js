@@ -42,7 +42,7 @@ $(function (){
 
         dc.loadMenuCategories = function () {
             showLoading("#main-content");
-            $ajaxUtils.sendGetRequest(allCategoriesUrl,buildAndShowCategoriesHTML);
+            $ajaxUtils.sendGetRequest(allCategoriesHtml,buildAndShowCategoriesHTML);
           };
         function buildAndShowCategoriesHTML(categories){
             $ajaxUtils.sendGetRequest(categoriesTitleHtml,function(categoriesTitleHtml){
