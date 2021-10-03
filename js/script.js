@@ -88,6 +88,32 @@ $(function (){
                 },false);
             },false);
         };
+
+        function buildMenuItemsViewHtml(categoryMenuItems,menuItemsTitleHtml,menuItemHtml) {
+            menuItemsTitleHtml = insertProperty(menuItemsTitleHtml,"name",categoryMenuItems.category.name);
+            menuItemsTitleHtml = insertProperty(menuItemsTitleHtml,"special_instructions",categoryMenuItems.category.special_instructions);
+            var finalHtml = menuItemsTitleHtml;
+            finalHtml += "<section class='row'>";
+            var menuItems = categoryMenuItems.menu_items;
+            var catShortName = categoryMenuItems.category.short_name;
+            for (var i = 0; i < menuItems.length; i++) {
+                var html = menuItemHtml;
+                html = insertProperty(html, "short_name", menuItems[i].short_name);
+                html = insertProperty(html,"catShortName",catShortName);
+                html = insertItemPrice(html,"price_small",menuItems[i].price_small);
+                html = insertItemPortionName(html,"small_portion_name",menuItems[i].small_portion_name);
+                html = insertItemPrice(html,"price_large",menuItems[i].price_large);
+                html = insertItemPortionName(html,"large_portion_name",menuItems[i].large_portion_name);
+                html = insertProperty(html,"name",menuItems[i].name);
+                html = insertProperty(html,"description",menuItems[i].description);
+                if (i % 2 != 0) {
+                    html += "<div class='clearfix visible-lg-block visible-md-block'></div>";
+                }
+                finalHtml += html;
+            }
+            finalHtml += "</section>";
+            return finalHtml;
+        };
     });
     global.$dc = dc;
 })(window);
