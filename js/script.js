@@ -50,7 +50,7 @@ $(function (){
           classes += " active";
           document.querySelector("#navMenuButton").className = classes;
         }
-      };
+    };
 
     document.addEventListener("DOMContentLoaded",function(event){
         showLoading("#main-content");
@@ -96,6 +96,7 @@ $(function (){
         function buildAndShowMenuItemsHTML(cetegoryMenuItems){
             $ajaxUtils.sendGetRequest(menuItemsTitleHtml,function (menuItemsTitleHtml){
                 $ajaxUtils.sendGetRequest(menuItemHtml,function(menuItemHtml){
+                    switchMenuToActive();
                     var menuItemsViewHtml = buildMenuItemsViewHtml(categoryMenuItems,menuItemsTitleHtml,menuItemHtml);
                     insertHtml("#main-content",menuItemsViewHtml);
                 },false);
